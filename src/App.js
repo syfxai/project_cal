@@ -5,14 +5,13 @@ export default function App() {
   const [inputs, setInputs] = useState({
     weight: 110,
     oldPawnPrice: 565.71,
-    currentPawnPrice: 579.82, // Nama baru untuk kejelasan
+    currentPawnPrice: 579.82,
     loanPercent: 80,
     feeBasis: 'marhun',
     feeRate: 0.85,
     oldPawnDate: '',
     newPawnDate: '',
-    // Input baru dari TradingView
-    athDistance: -10.0, // Peratusan terus dari TV
+    athDistance: -10.0,
     marketStatus: 'avoid',
     olScore: 5
   });
@@ -114,7 +113,24 @@ export default function App() {
 
   const ResultsPlaceholder = () => (
     <div className="space-y-6">
-      {/* Placeholder content remains the same */}
+      <div className="bg-gradient-to-br from-gray-300 to-gray-400 rounded-2xl shadow-xl p-6 text-white animate-pulse">
+        <h2 className="text-2xl font-bold mb-4 flex items-center"><PieChart className="w-6 h-6 mr-2" />Ringkasan Keuntungan</h2>
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="bg-white/20 rounded-lg p-3"><p className="text-sm opacity-90">Pinjaman Lama</p><p className="text-xl font-bold">{formatRM(0)}</p></div>
+          <div className="bg-white/20 rounded-lg p-3"><p className="text-sm opacity-90">Pinjaman Baru</p><p className="text-xl font-bold">{formatRM(0)}</p></div>
+          <div className="bg-white/20 rounded-lg p-3"><p className="text-sm opacity-90">Wang Tambahan</p><p className="text-xl font-bold">{formatRM(0)}</p></div>
+          <div className="bg-white/20 rounded-lg p-3"><p className="text-sm opacity-90">Jumlah Kos Upah</p><p className="text-xl font-bold">{formatRM(0)}</p></div>
+        </div>
+        <div className="bg-white/30 rounded-lg p-4 backdrop-blur-sm"><p className="text-sm opacity-90 mb-1">UNTUNG BERSIH OVERLAP</p><p className="text-4xl font-bold flex items-center">{formatRM(0)}</p><p className="text-lg mt-1">ROI: 0.00%</p></div>
+      </div>
+      <div className="bg-white rounded-2xl shadow-xl p-6 animate-pulse">
+        <h3 className="text-xl font-bold text-gray-800 mb-4">🎯 Cadangan & Analisa Risiko</h3>
+        <div className="h-10 bg-gray-200 rounded-lg w-3/4 mb-4"></div>
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <div className="bg-gray-50 rounded-lg p-3"><p className="text-xs text-gray-600">Risk Level</p><p className="text-lg font-bold text-gray-800">-</p></div>
+          <div className="bg-gray-50 rounded-lg p-3"><p className="text-xs text-gray-600">Jarak dari ATH</p><p className="text-lg font-bold text-gray-800">-</p></div>
+        </div>
+      </div>
     </div>
   );
 
@@ -133,8 +149,6 @@ export default function App() {
         {activeTab === 'calculator' ? (
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl shadow-xl p-6 space-y-5">
-              
-              {/* --- BAHAGIAN INPUT PAJAKAN YANG DISUSUN SEMULA --- */}
               <div className="p-4 rounded-lg border-2 border-gray-200">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center"><DollarSign className="w-6 h-6 mr-2 text-amber-500" />Input Pajakan</h2>
                 <div className="space-y-5">
@@ -148,8 +162,6 @@ export default function App() {
                     </div>
                 </div>
               </div>
-
-              {/* --- BAHAGIAN INPUT PASARAN YANG FOKUS --- */}
               <div className="bg-sky-50 p-4 rounded-lg border-2 border-sky-200">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center"><BarChart3 className="w-6 h-6 mr-2 text-sky-500" />Analisa Pasaran (dari TradingView)</h2>
                 <div className="space-y-5">
@@ -162,19 +174,21 @@ export default function App() {
                     <div><label className="block text-sm font-semibold text-gray-700 mb-2">Skor OL ({inputs.olScore}/10)</label><input type="range" min="0" max="10" step="0.5" value={inputs.olScore} onChange={(e) => handleInputChange('olScore', e.target.value)} className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg" /></div>
                 </div>
               </div>
-              
-              <div className="bg-gray-50 p-4 rounded-lg border-2 border-gray-200">{/* Konfigurasi Upah & Tempoh */}</div>
+              <div className="bg-gray-50 p-4 rounded-lg border-2 border-gray-200"><p className="text-sm font-semibold text-gray-700 mb-3">Konfigurasi Upah & Tempoh</p><div className="grid sm:grid-cols-2 gap-4"><div><label className="block text-xs font-medium text-gray-600 mb-1">Asas Kiraan Upah</label><select value={inputs.feeBasis} onChange={(e) => handleInputChange('feeBasis', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"><option value="marhun">Nilai Marhun</option><option value="pinjaman">Jumlah Pinjaman</option></select></div><div><label className="block text-xs font-medium text-gray-600 mb-1">Kadar Upah (%)</label><input type="number" value={inputs.feeRate} onChange={(e) => handleInputChange('feeRate', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none" step="0.01"/></div></div><div className="grid sm:grid-cols-2 gap-4 mt-4"><div><label className="block text-xs font-medium text-gray-600 mb-1">Tarikh Pajak Lama</label><input type="date" value={inputs.oldPawnDate} onChange={(e) => handleInputChange('oldPawnDate', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"/></div><div><label className="block text-xs font-medium text-gray-600 mb-1">Tarikh Pajak Baru</label><input type="date" value={inputs.newPawnDate} onChange={(e) => handleInputChange('newPawnDate', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"/></div></div><div className="mt-3 flex items-center text-gray-600"><CalendarDays className="w-5 h-5 mr-2 text-amber-500"/><p className="text-sm">Tempoh: <span className="font-bold">{duration.months} bulan {duration.days} hari</span></p></div></div>
             </div>
             <div>
               {results ? (
-                <div className="space-y-6">{/* Paparan Hasil */}</div>
+                <div className="space-y-6">
+                  <div className="bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl shadow-xl p-6 text-white"><h2 className="text-2xl font-bold mb-4 flex items-center"><PieChart className="w-6 h-6 mr-2" />Ringkasan Keuntungan</h2><div className="grid grid-cols-2 gap-4 mb-4"><div className="bg-white/20 rounded-lg p-3"><p className="text-sm opacity-90">Pinjaman Lama</p><p className="text-xl font-bold">{formatRM(results.oldLoanAmount)}</p></div><div className="bg-white/20 rounded-lg p-3"><p className="text-sm opacity-90">Pinjaman Baru</p><p className="text-xl font-bold">{formatRM(results.newLoanAmount)}</p></div><div className="bg-white/20 rounded-lg p-3"><p className="text-sm opacity-90">Wang Tambahan</p><p className="text-xl font-bold">{formatRM(results.loanDifference)}</p></div><div className="bg-white/20 rounded-lg p-3"><p className="text-sm opacity-90">Jumlah Kos Upah</p><p className="text-xl font-bold">{formatRM(results.totalFees)}</p></div></div><div className="bg-white/30 rounded-lg p-4 backdrop-blur-sm"><p className="text-sm opacity-90 mb-1">UNTUNG BERSIH OVERLAP</p><p className="text-4xl font-bold flex items-center">{formatRM(results.netProfit)}{results.netProfit > 0 ? (<TrendingUp className="w-8 h-8 ml-2" />) : (<TrendingDown className="w-8 h-8 ml-2" />)}</p><p className="text-lg mt-1">ROI: {results.profitMargin.toFixed(2)}%</p></div></div>
+                  <div className="bg-white rounded-2xl shadow-xl p-6"><h3 className="text-xl font-bold text-gray-800 mb-4">🎯 Cadangan & Analisa Risiko</h3><div className="mb-4"><SignalBadge signal={results.signal} text={results.recommendation} /></div><div className="grid grid-cols-2 gap-3 mb-4"><div className="bg-gray-50 rounded-lg p-3"><p className="text-xs text-gray-600">Risk Level</p><p className="text-lg font-bold text-gray-800">{results.riskLevel}</p></div><div className="bg-gray-50 rounded-lg p-3"><p className="text-xs text-gray-600">Jarak dari ATH (Pasaran)</p><p className="text-lg font-bold text-gray-800">{results.athDistance.toFixed(1)}%</p></div></div></div>
+                </div>
               ) : (
                 <ResultsPlaceholder />
               )}
             </div>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl shadow-xl p-8">{/* Bahagian Panduan */}</div>
+          <div className="bg-white rounded-2xl shadow-xl p-8">{/* Bahagian Panduan di sini */}</div>
         )}
         <div className="mt-8 text-center text-sm text-gray-600"><p>⚠️ Disclaimer: Ini adalah alat bantuan sahaja. Sentiasa buat kajian sendiri (DYOR).</p></div>
       </div>
