@@ -111,7 +111,6 @@ export default function App() {
     return (<div className={`inline-flex items-center px-4 py-2 rounded-lg border-2 font-semibold ${colors[signal]}`}>{signal === 'green' && <CheckCircle className="w-5 h-5 mr-2" />}{signal === 'red' && <AlertTriangle className="w-5 h-5 mr-2" />}{(signal === 'yellow' || signal === 'orange') && <Info className="w-5 h-5 mr-2" />}{text}</div>);
   };
 
-  // Komponen Placeholder untuk dipaparkan sebelum input lengkap
   const ResultsPlaceholder = () => (
     <div className="space-y-6">
       <div className="bg-gradient-to-br from-gray-400 to-gray-500 rounded-2xl shadow-xl p-6 text-white animate-pulse">
@@ -161,7 +160,12 @@ export default function App() {
               <div className="bg-sky-50 p-4 rounded-lg border-2 border-sky-200">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center"><BarChart3 className="w-6 h-6 mr-2 text-sky-500" />Input Pasaran (dari TradingView)</h2>
                 <div className="space-y-5">
-                    <div><label className="block text-sm font-semibold text-gray-700 mb-2">Harga Semasa (RM/gram)</label><input type="number" value={inputs.currentPrice} onChange={(e) => handleInputChange('currentPrice', e.target.value)} className="w-full px-4 py-3 border-2 border-amber-300 rounded-lg focus:border-amber-500 focus:outline-none bg-amber-50" /></div>
+                    {/* --- PERUBAHAN LABEL DI SINI --- */}
+                    <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">Harga Penilaian Ar-Rahnu Semasa (RM/gram)</label>
+                        <input type="number" value={inputs.currentPrice} onChange={(e) => handleInputChange('currentPrice', e.target.value)} className="w-full px-4 py-3 border-2 border-amber-300 rounded-lg focus:border-amber-500 focus:outline-none bg-amber-50" />
+                        <p className="text-xs text-gray-500 mt-1">💡 Penting: Guna harga 'penilaian/belian' dari Ar-Rahnu, bukan harga spot dari TradingView.</p>
+                    </div>
                     <div><label className="block text-sm font-semibold text-gray-700 mb-2">Harga ATH Rujukan (RM/gram)</label><input type="number" value={inputs.ath} onChange={(e) => handleInputChange('ath', e.target.value)} className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none" /></div>
                     <div><label className="block text-sm font-semibold text-gray-700 mb-2">Status Pasaran Semasa</label><select value={inputs.marketStatus} onChange={(e) => handleInputChange('marketStatus', e.target.value)} className="w-full px-3 py-3 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"><option value="safe">🟢 SAFE TO OL (Selamat)</option><option value="caution">🟡 CAUTION (Berhati-hati)</option><option value="avoid">🔴 AVOID OL (Elakkan)</option><option value="wait">⚪ WAIT (Tunggu)</option></select></div>
                     <div><label className="block text-sm font-semibold text-gray-700 mb-2">Skor OL ({inputs.olScore}/10)</label><input type="range" min="0" max="10" step="0.5" value={inputs.olScore} onChange={(e) => handleInputChange('olScore', e.target.value)} className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg" /></div>
@@ -169,7 +173,6 @@ export default function App() {
               </div>
               <div className="bg-gray-50 p-4 rounded-lg border-2 border-gray-200"><p className="text-sm font-semibold text-gray-700 mb-3">Konfigurasi Upah & Tempoh</p><div className="grid sm:grid-cols-2 gap-4"><div><label className="block text-xs font-medium text-gray-600 mb-1">Asas Kiraan Upah</label><select value={inputs.feeBasis} onChange={(e) => handleInputChange('feeBasis', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"><option value="marhun">Nilai Marhun</option><option value="pinjaman">Jumlah Pinjaman</option></select></div><div><label className="block text-xs font-medium text-gray-600 mb-1">Kadar Upah (%)</label><input type="number" value={inputs.feeRate} onChange={(e) => handleInputChange('feeRate', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none" step="0.01"/></div></div><div className="grid sm:grid-cols-2 gap-4 mt-4"><div><label className="block text-xs font-medium text-gray-600 mb-1">Tarikh Pajak Lama</label><input type="date" value={inputs.oldPawnDate} onChange={(e) => handleInputChange('oldPawnDate', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"/></div><div><label className="block text-xs font-medium text-gray-600 mb-1">Tarikh Pajak Baru</label><input type="date" value={inputs.newPawnDate} onChange={(e) => handleInputChange('newPawnDate', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"/></div></div><div className="mt-3 flex items-center text-gray-600"><CalendarDays className="w-5 h-5 mr-2 text-amber-500"/><p className="text-sm">Tempoh: <span className="font-bold">{duration.months} bulan {duration.days} hari</span></p></div></div>
             </div>
-            {/* Paparan Hasil yang Sentiasa Kelihatan */}
             <div>
               {results ? (
                 <div className="space-y-6">
