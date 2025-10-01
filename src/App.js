@@ -144,7 +144,6 @@ export default function App() {
                 </div>
               </div>
               <div className="bg-gray-50 p-4 rounded-lg border-2 border-gray-200"><p className="text-sm font-semibold text-gray-700 mb-3">Konfigurasi Upah & Tempoh</p><div className="grid sm:grid-cols-2 gap-4"><div><label className="block text-xs font-medium text-gray-600 mb-1">Asas Kiraan Upah</label><select value={inputs.feeBasis} onChange={(e) => handleInputChange('feeBasis', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"><option value="marhun">Nilai Marhun</option><option value="pinjaman">Jumlah Pinjaman</option></select></div><div><label className="block text-xs font-medium text-gray-600 mb-1">Kadar Upah (%)</label><input type="number" value={inputs.feeRate} onChange={(e) => handleInputChange('feeRate', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none" step="0.01"/></div></div><div className="grid sm:grid-cols-2 gap-4 mt-4"><div><label className="block text-xs font-medium text-gray-600 mb-1">Tarikh Pajak Lama</label><input type="date" value={inputs.oldPawnDate} onChange={(e) => handleInputChange('oldPawnDate', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"/></div><div>
-                    {/* --- KESILAPAN TYPO YANG TELAH DIPERBETULKAN DI SINI --- */}
                     <label className="block text-xs font-medium text-gray-600 mb-1">Tarikh Pajak Baru</label>
                     <input type="date" value={inputs.newPawnDate} onChange={(e) => handleInputChange('newPawnDate', e.target.value)} className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"/></div></div><div className="mt-3 flex items-center text-gray-600"><CalendarDays className="w-5 h-5 mr-2 text-amber-500"/><p className="text-sm">Tempoh: <span className="font-bold">{duration.months} bulan {duration.days} hari</span></p></div></div>
             </div>
@@ -168,17 +167,4 @@ export default function App() {
       </div>
     </div>
   );
-}```
-
-### Langkah Seterusnya (Kali Ini Sepatutnya Berjaya!)
-
-1.  **Gantikan Kod:** Salin kod di atas dan tampal ke dalam `src/App.js` anda.
-2.  **Hantar ke GitHub:** Buka terminal anda dan jalankan semula 3 arahan penting:
-    ```bash
-    git add .
-    git commit -m "Fix final JSX typo in label tag"
-    git push
-    ```
-3.  **Pantau Vercel:** Buka dashboard Vercel. Proses `build` akan bermula sekali lagi. Log kali ini sepatutnya berjalan lancar melepasi `Failed to compile` dan berakhir dengan kejayaan.
-
-Saya sangat yakin ini akan menyelesaikan masalah `build` anda. Beritahu saya hasilnya.
+}
