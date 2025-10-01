@@ -4,15 +4,15 @@ import { Calculator, TrendingUp, TrendingDown, AlertTriangle, CheckCircle, Info,
 export default function App() {
   const [inputs, setInputs] = useState({
     weight: 100,
-    oldPawnPrice: 565.71,
-    currentPrice: 562.30,
+    oldPawnPrice: 280,
+    currentPrice: 350,
     loanPercent: 80,
     feeBasis: 'marhun',
     feeRate: 0.85,
     oldPawnDate: '',
     newPawnDate: '',
-    ath: 527.01,
-    marketStatus: 'avoid',
+    ath: 400,
+    marketStatus: 'wait',
     olScore: 5
   });
 
@@ -160,7 +160,6 @@ export default function App() {
               <div className="bg-sky-50 p-4 rounded-lg border-2 border-sky-200">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center"><BarChart3 className="w-6 h-6 mr-2 text-sky-500" />Input Pasaran (dari TradingView)</h2>
                 <div className="space-y-5">
-                    {/* --- PERUBAHAN LABEL DI SINI --- */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">Harga Penilaian Ar-Rahnu Semasa (RM/gram)</label>
                         <input type="number" value={inputs.currentPrice} onChange={(e) => handleInputChange('currentPrice', e.target.value)} className="w-full px-4 py-3 border-2 border-amber-300 rounded-lg focus:border-amber-500 focus:outline-none bg-amber-50" />
@@ -185,7 +184,13 @@ export default function App() {
             </div>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl shadow-xl p-8">{/* Bahagian Panduan di sini */}</div>
+          <div className="bg-white rounded-2xl shadow-xl p-8">
+            <h2 className="text-3xl font-bold text-gray-800 mb-6">📚 Panduan Overlap Ar-Rahnu</h2>
+            <div className="space-y-6">
+              <section><h3 className="text-xl font-bold text-amber-600 mb-3">✅ Bila Masa SESUAI Overlap?</h3><div className="bg-green-50 border-l-4 border-green-500 p-4 rounded"><ul className="space-y-2 text-gray-700"><li className="flex items-start"><span className="text-green-600 mr-2">•</span><span><strong>Selepas pullback</strong> - Harga turun dari peak, bounce dari support, confirm uptrend continue</span></li><li className="flex items-start"><span className="text-green-600 mr-2">•</span><span><strong>Dalam uptrend</strong> - Trend naik confirmed dengan higher highs</span></li><li className="flex items-start"><span className="text-green-600 mr-2">•</span><span><strong>Jauh dari ATH</strong> - Minimum 15-20% dari all-time high</span></li><li className="flex items-start"><span className="text-green-600 mr-2">•</span><span><strong>Ada catalyst bullish</strong> - News positif untuk emas (Fed rate cut, geopolitical tension)</span></li></ul></div></section>
+              <section><h3 className="text-xl font-bold text-red-600 mb-3">❌ Bila JANGAN Overlap?</h3><div className="bg-red-50 border-l-4 border-red-500 p-4 rounded"><ul className="space-y-2 text-gray-700"><li className="flex items-start"><span className="text-red-600 mr-2">•</span><span><strong>Masa ATH</strong> - Harga di all-time high atau dekat sangat (95%+ dari ATH)</span></li><li className="flex items-start"><span className="text-red-600 mr-2">•</span><span><strong>Downtrend</strong> - Pattern lower highs dan lower lows</span></li><li className="flex items-start"><span className="text-red-600 mr-2">•</span><span><strong>News negatif</strong> - Fed hawkish, USD mengukuh, inflation turun</span></li><li className="flex items-start"><span className="text-red-600 mr-2">•</span><span><strong>Tak mampu bayar upah</strong> - Cashflow tak mencukupi untuk maintain</span></li></ul></div></section>
+            </div>
+          </div>
         )}
         <div className="mt-8 text-center text-sm text-gray-600"><p>⚠️ Disclaimer: Ini adalah alat bantuan sahaja. Sentiasa buat kajian sendiri (DYOR).</p></div>
       </div>
